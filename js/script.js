@@ -5,10 +5,21 @@ window.onload = function() {
   lnk.href = canvas.toDataURL();
   var textInput = document.getElementById('pictureText');
   var pictureText = document.getElementById('pictureText').value;
+  var chooseColor = document.querySelectorAll('.color-picker');
   var imageObj = new Image();
+  var color = '#767676';
   var state = "initial";
+
   textInput.addEventListener("input", function() {
     placeText();
+  });
+
+  [].forEach.call(chooseColor, function(el) {
+    el.addEventListener("click", function() {
+      color = el.dataset.color;
+      placeText();
+      setDownload();
+    });
   });
 
   textInput.addEventListener("change", function() {
@@ -20,7 +31,7 @@ window.onload = function() {
       context.clearRect(0, 0, canvas.width, canvas.height);
       context.drawImage(imageObj, 0, 0);
       context.font = "20px Roboto";
-      context.fillStyle = '#767676';
+      context.fillStyle = color;
       context.textAlign="center";
       context.fillText("Your text here", canvas.width/2, 50);
       context.save();
@@ -39,6 +50,7 @@ window.onload = function() {
       imageObj.src = "https://pbs.twimg.com/profile_images/616542814319415296/McCTpH_E_400x400.jpg";
       imageObj.setAttribute("crossOrigin", "Anonymous");
       pictureText = document.getElementById('pictureText').value;
+      context.fillStyle = color;
       context.fillText(pictureText, canvas.width/2, 50);
       context.save();
     }
