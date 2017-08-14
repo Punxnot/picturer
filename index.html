@@ -7,13 +7,23 @@
   </head>
   <body>
     <div class="canvas-container">
-      <canvas id="myCanvas" width="400" height="400"></canvas>
-      <input type="text" id="pictureText" placeholder="Type your text">
-      <a class="btn" id="downloadLink" download="picturer-img.png">Download</a>
+      <canvas id="myCanvas" width="512" height="512"></canvas>
+      <div class="input-block">
+        <input type="text" id="pictureText" placeholder="Type your text" maxlength="20">
+        <a class="btn" id="downloadLink" download="picturer-img.jpg">Download</a>
+      </div>
       <div class="colors">
-        <div class="color-picker" data-color="#767676"></div>
-        <div class="color-picker" data-color="#CC0000"></div>
+        <div class="color-picker" data-color="#2E2E2E"></div>
         <div class="color-picker" data-color="#00688B"></div>
+        <div class="color-picker" data-color="#CC0000"></div>
+      </div>
+      <div class="moodButtons">
+        <input type="radio" class="change-mood" id="neutral" name="change-mood" checked>
+        <label for="neutral">:|</label>
+        <input type="radio" class="change-mood" id="happy" name="change-mood">
+        <label for="happy">:)</label>
+        <input type="radio" class="change-mood" id="sad" name="change-mood">
+        <label for="sad">:(</label>
       </div>
     </div>
 

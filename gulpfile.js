@@ -7,12 +7,12 @@ var gulp = require('gulp'),
   concat = require('gulp-concat');
 
 // Scripts Task
-// gulp.task('scripts', function(){
-//   gulp.src('coffee/*.coffee')
-//   .pipe(plumber())
-//   .pipe(coffee())
-//   .pipe(gulp.dest('js/'));
-// });
+gulp.task('scripts', function(){
+  gulp.src('coffee/*.coffee')
+  .pipe(plumber())
+  .pipe(coffee())
+  .pipe(gulp.dest('js/'));
+});
 
 // Concatenate JS scripts
 gulp.task('concat', function(){
@@ -34,8 +34,9 @@ gulp.task('styles', function() {
 // Watch Task
 gulp.task('watch', function() {
   gulp.watch('scss/*.scss', ['styles']);
+  gulp.watch('coffee/*.coffee', ['scripts']);
   gulp.watch('js/*.js', ['concat']);
 });
 
 // Default Task
-gulp.task('default', ['concat', 'styles', 'watch']);
+gulp.task('default', ['scripts', 'concat', 'styles', 'watch']);

@@ -1,63 +1,81 @@
-window.onload = function() {
-  var canvas = document.getElementById("myCanvas");
-  var context = canvas.getContext("2d");
-  var lnk = document.getElementById("downloadLink");
-  lnk.href = canvas.toDataURL();
-  var textInput = document.getElementById('pictureText');
-  var pictureText = document.getElementById('pictureText').value;
-  var chooseColor = document.querySelectorAll('.color-picker');
-  var imageObj = new Image();
-  var color = '#767676';
-  var state = "initial";
-
-  textInput.addEventListener("input", function() {
-    placeText();
-  });
-
-  [].forEach.call(chooseColor, function(el) {
-    el.addEventListener("click", function() {
-      color = el.dataset.color;
-      placeText();
-      setDownload();
+(function() {
+  window.onload = function() {
+    var canvas, changeMood, chooseColor, chooseMod, color, context, imageObj, imgSrc, lnk, pictureText, placeText, setDownload, state, textInput;
+    canvas = document.getElementById("myCanvas");
+    context = canvas.getContext("2d");
+    context.fillStyle = "white";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    lnk = document.getElementById("downloadLink");
+    lnk.href = canvas.toDataURL();
+    textInput = document.getElementById('pictureText');
+    pictureText = "Your text here";
+    chooseColor = document.querySelectorAll('.color-picker');
+    chooseMod = document.querySelectorAll('.change-mood');
+    imgSrc = "img/sticker_neutral.jpg";
+    imageObj = new Image();
+    imageObj.src = imgSrc;
+    color = '#2E2E2E';
+    state = "initial";
+    textInput.addEventListener("input", function() {
+      return placeText();
     });
-  });
-
-  textInput.addEventListener("change", function() {
-    setDownload();
-  })
-  imageObj.onload = function(){
-    if (state == "initial") {
+    [].forEach.call(chooseMod, function(el) {
+      return el.addEventListener("change", function() {
+        return changeMood(el.id);
+      });
+    });
+    [].forEach.call(chooseColor, function(el) {
+      return el.addEventListener("click", function() {
+        color = el.dataset.color;
+        placeText();
+        return setDownload();
+      });
+    });
+    textInput.addEventListener("change", function() {
+      return setDownload();
+    });
+    imageObj.onload = function() {
+      if (state === "initial") {
+        context.beginPath();
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(imageObj, 0, 0);
+        context.font = "30px Neucha";
+        context.fillStyle = color;
+        context.textAlign = "center";
+        context.fillText(pictureText, canvas.width / 2, 355);
+        return context.save();
+      }
+    };
+    imageObj.setAttribute("crossOrigin", "Anonymous");
+    placeText = function() {
+      state = "changed";
       context.beginPath();
       context.clearRect(0, 0, canvas.width, canvas.height);
       context.drawImage(imageObj, 0, 0);
-      context.font = "20px Roboto";
-      context.fillStyle = color;
-      context.textAlign="center";
-      context.fillText("Your text here", canvas.width/2, 50);
-      context.save();
-    }
-  };
-  imageObj.src = "https://pbs.twimg.com/profile_images/616542814319415296/McCTpH_E_400x400.jpg";
-  imageObj.setAttribute("crossOrigin", "Anonymous");
-
-  function placeText() {
-    state = "changed";
-    pictureText = document.getElementById('pictureText').value;
-    if (pictureText.length > 0) {
-      context.beginPath();
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      context.drawImage(imageObj, 0, 0);
-      imageObj.src = "https://pbs.twimg.com/profile_images/616542814319415296/McCTpH_E_400x400.jpg";
       imageObj.setAttribute("crossOrigin", "Anonymous");
-      pictureText = document.getElementById('pictureText').value;
+      if (textInput.value.length > 0) {
+        pictureText = textInput.value;
+      }
       context.fillStyle = color;
-      context.fillText(pictureText, canvas.width/2, 50);
-      context.save();
-    }
-  }
+      context.fillText(pictureText, canvas.width / 2, 355);
+      return context.save();
+    };
+    changeMood = function(mood) {
+      state = "initial";
+      if (mood === "happy") {
+        imgSrc = "img/sticker_happy.jpg";
+      } else if (mood === "sad") {
+        imgSrc = "img/sticker_sad.jpg";
+      } else {
+        imgSrc = "img/sticker_neutral.jpg";
+      }
+      return imageObj.src = imgSrc;
+    };
+    return setDownload = function() {
+      var newCanvas;
+      newCanvas = document.getElementById("myCanvas");
+      return lnk.href = newCanvas.toDataURL();
+    };
+  };
 
-  function setDownload() {
-    var newCanvas = document.getElementById("myCanvas");
-    lnk.href = newCanvas.toDataURL();
-  }
-};
+}).call(this);

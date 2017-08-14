@@ -1,14 +1,4 @@
-@font-face {
-  font-family: 'Roboto';
-  font-weight: 400;
-  src: url(../fonts/Roboto-Regular.ttf);
-}
-
-@font-face {
-  font-family: 'Roboto';
-  font-weight: 700;
-  src: url(../fonts/Roboto-Bold.ttf);
-}
+@import 'https://fonts.googleapis.com/css?family=Neucha&subset=cyrillic';
 
 @mixin flexbox() {
   display: -webkit-box;
@@ -44,7 +34,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', Arial, sans-serif;
+  font-family: 'Neucha', cursive;
 }
 
 ul, ol {
@@ -56,14 +46,20 @@ ul, ol {
 }
 
 .canvas-container {
-  width: 500px;
+  width: 512px;
   margin: 0 auto;
+  border: 1px solid #e7e7e7;
+  border-bottom: 0;
+}
+
+.input-block {
+  font-size: 0;
 }
 
 input[type=text] {
   display: inline-block;
   vertical-align: middle;
-  width: 250px;
+  width: 345px;
   height: 40px;
   padding: 0 10px;
   font-size: 24px;
@@ -77,7 +73,7 @@ input[type=text] {
 .btn {
   display: inline-block;
   vertical-align: middle;
-  width: 145px;
+  width: 165px;
   line-height: 40px;
   padding: 0 10px;
   text-align: center;
@@ -90,19 +86,19 @@ input[type=text] {
 .colors {
   position: absolute;
   left: 50%;
-  top: 250px;
-  -webkit-transform: translateX(-280px);
-  -ms-transform: translateX(-280px);
-  transform: translateX(-280px);
+  top: 364px;
+  -webkit-transform: translateX(-276px);
+  -ms-transform: translateX(-276px);
+  transform: translateX(-276px);
 }
 
 .color-picker {
-  width: 30px;
-  height: 50px;
+  width: 20px;
+  height: 52px;
   cursor: pointer;
 
   &:first-child {
-    background: #767676;
+    background: #2E2E2E;
   }
 
   &:nth-child(2) {
@@ -111,5 +107,38 @@ input[type=text] {
 
   &:last-child {
     background: #CC0000;
+  }
+}
+
+.moodButtons {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(256px);
+  -ms-transform: translateX(256px);
+  transform: translateX(256px);
+
+  input[type=radio] {
+    display: none;
+  }
+
+  label {
+    display: block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background: white;
+    font-size: 24px;
+    cursor: pointer;
+
+    &:hover {
+      background: lighten(#00688B, 70%);
+    }
+  }
+
+  input[type=radio]:checked + label {
+    background: #00688B;
+    color: white;
   }
 }
